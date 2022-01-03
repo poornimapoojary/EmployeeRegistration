@@ -38,7 +38,7 @@ public class EmployeeController {
 			throws ResourceNotFoundException {
 		logger.info("getting the Employee with Employee Number: {}",employeeId);
 		Employee employee = employeeRepository.findById(employeeId)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for id:: "+employeeId));
+				.orElseThrow(() -> new ResourceNotFoundException(employeeId.toString()));
 		return ResponseEntity.ok().body(employee);
 	}
 	
@@ -48,7 +48,7 @@ public class EmployeeController {
 		logger.info("getting the Employee with Employee Name: {}",employeeName);
 		List<Employee> employeeList = employeeRepository.findByEmployeeName(employeeName);
 		if(employeeList.isEmpty()) {
-			throw new ResourceNotFoundException("Employee not found for name:: "+employeeName);
+			throw new ResourceNotFoundException(employeeName);
 		}
 		return ResponseEntity.ok().body(employeeList);
 	}
@@ -64,7 +64,7 @@ public class EmployeeController {
 			@Valid @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
 		logger.info("updating the Employee with Employee Number: {}",employeeId);
 		Employee employee = employeeRepository.findById(employeeId)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for id:: "+employeeId));
+				.orElseThrow(() -> new ResourceNotFoundException(employeeId.toString()));
 
 		employee.setEmployeeNo(employeeDetails.getEmployeeNo());
 		employee.setEmployeeName(employeeDetails.getEmployeeName());
@@ -81,7 +81,7 @@ public class EmployeeController {
 			throws ResourceNotFoundException {
 		logger.info("deleting the employee with employee number: {}",employeeId);
 		Employee employee = employeeRepository.findById(employeeId)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for id:: "+employeeId));
+				.orElseThrow(() -> new ResourceNotFoundException(employeeId.toString()));
 
 		employeeRepository.delete(employee);
 		Map<String, Boolean> response = new HashMap<>();
