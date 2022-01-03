@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <h2 style="text-align: center;">{{title}}</h2>
+</nav>
+
+<div class="container">
+  <br [hidden]="submitted">
+  <div class="card">
+    <div [hidden]="submitted" style="width: 400px;" class="card-body">
+      <h3>Create Employee</h3>
+      <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Employee Number</label>
+          <input type="text" formControlName="employeeNo" class="form-control" placeholder="Employee Number" id="employeeNo" required [(ngModel)]="employee.employeeNo" maxlength="10">
+          <span class="error" *ngIf="employeeNo.errors?.required">*Employee Number is required</span>
+          <div *ngIf="employeeNo.invalid && (employeeNo.touched || employeeNo.dirty)">
+            <span class="error" *ngIf="employeeNo.errors?.pattern">*Enter only numbers</span>
+        </div>
+        </div>
+        <div class="form-group">
+          <label for="name">Employee Name</label>
+          <input type="text" formControlName="employeeName" class="form-control" placeholder="Employee name" id="employeeName" required [(ngModel)]="employee.employeeName" maxlength="100">
+            <span class="error" *ngIf="employeeName.errors?.required">*Employee Name is required</span>
+        </div>
+        
+    <div class="form-group">
+      <label for="name">DOJ</label>
+      <input type="date" class="form-control" ng-init="model=(date:'dd-MM-yyyy')" id="dateOfJoining" required [(ngModel)]="employee.dateOfJoining" formControlName="dateOfJoining">
+        <span class="error" *ngIf="dateOfJoining.errors?.required">*date of join is required</span>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="name">Department</label>
+      <select class="form-control" id="department" required [(ngModel)]="employee.department" name="department">
+        <option ng-repeat="department in departments" value="{{department.code}}">{{department.code}}</option>
+      </select>
+    </div> -->
+    <div class="form-group">
+      <label for="name">Department</label>
+      <select class="form-control" id="department" required [(ngModel)]="employee.department" formControlName="department">
+        <option selected="selected" value="">--SELECT--</option>
+        <option value="Administration">AD</option>
+        <option value="Information Technology">IT</option>
+        <option value="Help Desk">HD</option>
+        <option value="Human Resource">HR</option>
+        <option value="Operation">OP</option>
+      </select>
+        <span class="error" *ngIf="department.errors?.required">*date of join is required</span>
+    </div>
+    <div class="form-group">
+      <label for="name">Salary</label>
+      <input type="text" formControlName="salary" class="form-control" id="salary" required [(ngModel)]="employee.salary" maxlength="10">
+      <span class="error" *ngIf="salary.errors?.required">*Salary is required</span>
+      <div *ngIf="salary.invalid && (salary.touched || salary.dirty)">
+        <span class="error" *ngIf="salary.errors?.pattern">*Enter only numbers</span>
+    </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!empForm.valid">Submit</button>
+    <button type="reset" class="btn btn-reset mx-3" (click)="onClear()">Clear</button>
+  </form>
+    </div>
+  </div>
+  <div [hidden]="!submitted">
+  <h5 style="display: block;">Submitted successfully!</h5>
+  <button class="btn btn-link" (click)="newEmployee()">Add new employee</button>
+</div>
+</div>
+
+
