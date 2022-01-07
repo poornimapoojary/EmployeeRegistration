@@ -1,5 +1,6 @@
 package com.rakbank.employeeRegistration.controller;
 
+import com.rakbank.employeeRegistration.exception.CustomExceptionEmployee;
 import com.rakbank.employeeRegistration.entity.Employee;
 import com.rakbank.employeeRegistration.exception.ResourceNotFoundException;
 import com.rakbank.employeeRegistration.repository.EmployeeRepository;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  *  EmployeeController class having all end-points for CRUD operations
@@ -54,8 +56,12 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/employees")
-	public Employee createEmployee(@Valid @RequestBody Employee employee) {
+	public Employee createEmployee(@Valid @RequestBody Employee employee) throws CustomExceptionEmployee {
 		logger.info("adding new Employee: {}",employee);
+		Optional<Employee> employee1 = employeeRepository.findById(employee.getEmployeeNo());
+		if(employee1.isPresent()){
+			throw  new CustomExceptionEmployee("Employee is already present");
+		}
 		return employeeRepository.save(employee);
 	}
 
@@ -65,13 +71,21 @@ public class EmployeeController {
 		logger.info("updating the Employee with Employee Number: {}",employeeId);
 		Employee employee = employeeRepository.findById(employeeId)
 				.orElseThrow(() -> new ResourceNotFoundException(employeeId.toString()));
-
-		employee.setEmployeeNo(employeeDetails.getEmployeeNo());
-		employee.setEmployeeName(employeeDetails.getEmployeeName());
-		employee.setDateOfJoining(employeeDetails.getDateOfJoining());
-		employee.setDepartment(employeeDetails.getDepartment());
-		employee.setSalary(employeeDetails.getSalary());
-		
+		if(employeeDetails.getEmployeeNo()!=0){
+			employee.setEmployeeNo(employeeDetails.getEmployeeNo());
+		}
+		if(employeeDetails.getEmployeeName()!=null){
+			employee.setEmployeeName(employeeDetails.getEmployeeName());
+		}
+		if(employeeDetails.getDateOfJoining()!=null ){
+			employee.setDateOfJoining(employeeDetails.getDateOfJoining());
+		}
+		if(employeeDetails.getDepartment()!=null){
+			employee.setDepartment(employeeDetails.getDepartment());
+		}
+		if(employeeDetails.getSalary()!=0){
+			employee.setSalary(employeeDetails.getSalary());
+		}
 		final Employee updatedEmployee = employeeRepository.save(employee);
 		return ResponseEntity.ok(updatedEmployee);
 	}
@@ -89,8 +103,7 @@ public class EmployeeController {
 		return response;
 	}
 	@DeleteMapping("/deleteEmployee")
-	public Map<String, Boolean> deleteAllEmployee()
-			throws ResourceNotFoundException {
+	public Map<String, Boolean> deleteAllEmployee() {
 		logger.info("deleting all the employees");
 		employeeRepository.deleteAll();
 		Map<String, Boolean> response = new HashMap<>();

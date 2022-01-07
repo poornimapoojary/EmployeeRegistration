@@ -9,23 +9,36 @@
       <h3>Create Employee</h3>
       <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="name">Employee Number</label>
-          <input type="text" formControlName="employeeNo" class="form-control" placeholder="Employee Number" id="employeeNo" required [(ngModel)]="employee.employeeNo" maxlength="10">
-          <span class="error" *ngIf="employeeNo.errors?.required">*Employee Number is required</span>
+          <div >
+            <label for="name">Employee Number</label>
+            <span class="error" >*</span>
+          </div>
+          <input type="text" formControlName="employeeNo" class="form-control" placeholder="enter employee number" id="employeeNo" required [(ngModel)]="employee.employeeNo" maxlength="10">
           <div *ngIf="employeeNo.invalid && (employeeNo.touched || employeeNo.dirty)">
-            <span class="error" *ngIf="employeeNo.errors?.pattern">*Enter only numbers</span>
+            <span class="error" *ngIf="employeeNo.errors?.required">Employee Number is required</span>
+            <span class="error" *ngIf="employeeNo.errors?.pattern">Enter only numbers</span>
         </div>
         </div>
         <div class="form-group">
-          <label for="name">Employee Name</label>
-          <input type="text" formControlName="employeeName" class="form-control" placeholder="Employee name" id="employeeName" required [(ngModel)]="employee.employeeName" maxlength="100">
-            <span class="error" *ngIf="employeeName.errors?.required">*Employee Name is required</span>
+          <div>
+            <label for="name">Employee Name</label>
+            <span class="error" >*</span>
+          </div>
+          <input type="text" formControlName="employeeName" class="form-control" placeholder="employee name" id="employeeName" required [(ngModel)]="employee.employeeName" maxlength="100">
+          <div *ngIf="employeeName.invalid && (employeeName.touched || employeeName.dirty)">
+            <span class="error" *ngIf="employeeName.errors?.required">Employee Name is required</span>
+          </div>
         </div>
         
     <div class="form-group">
-      <label for="name">DOJ</label>
-      <input type="date" class="form-control" ng-init="model=(date:'dd-MM-yyyy')" id="dateOfJoining" required [(ngModel)]="employee.dateOfJoining" formControlName="dateOfJoining">
-        <span class="error" *ngIf="dateOfJoining.errors?.required">*date of join is required</span>
+      <div>
+        <label for="name">Date of Joining</label>
+        <span class="error" >*</span>
+      </div>
+      <input type="date" class="form-control" ng-init="model=(date:'DD/MMM/YYYY')" id="dateOfJoining" required [(ngModel)]="employee.dateOfJoining" formControlName="dateOfJoining">
+        <div *ngIf="dateOfJoining.invalid && (dateOfJoining.touched || dateOfJoining.dirty)">
+          <span class="error" *ngIf="dateOfJoining.errors?.required">date of join is required</span>
+        </div>
     </div>
 
     <!-- <div class="form-group">
@@ -35,7 +48,10 @@
       </select>
     </div> -->
     <div class="form-group">
-      <label for="name">Department</label>
+      <div>
+        <label for="name">Department</label>
+        <span class="error" >*</span>
+      </div>
       <select class="form-control" id="department" required [(ngModel)]="employee.department" formControlName="department">
         <option selected="selected" value="">--SELECT--</option>
         <option value="Administration">AD</option>
@@ -44,14 +60,19 @@
         <option value="Human Resource">HR</option>
         <option value="Operation">OP</option>
       </select>
-        <span class="error" *ngIf="department.errors?.required">*date of join is required</span>
+      <div *ngIf="department.invalid && (department.touched || department.dirty)">
+        <span class="error" *ngIf="department.errors?.required">department is required</span>
+      </div>
     </div>
     <div class="form-group">
-      <label for="name">Salary</label>
-      <input type="text" formControlName="salary" class="form-control" id="salary" required [(ngModel)]="employee.salary" maxlength="10">
-      <span class="error" *ngIf="salary.errors?.required">*Salary is required</span>
+      <div>
+        <label for="name">Salary</label>
+        <span class="error" >*</span>
+      </div>
+      <input type="text" formControlName="salary" placeholder="enter salary" class="form-control" id="salary" required [(ngModel)]="employee.salary" maxlength="10">
       <div *ngIf="salary.invalid && (salary.touched || salary.dirty)">
-        <span class="error" *ngIf="salary.errors?.pattern">*Enter only numbers</span>
+        <span class="error" *ngIf="salary.errors?.required">Salary is required</span>
+        <span class="error" *ngIf="salary.errors?.pattern">Enter only numbers</span>
     </div>
     </div>
 

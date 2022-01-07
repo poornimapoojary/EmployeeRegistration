@@ -1,6 +1,5 @@
 package com.rakbank.employeeRegistration.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rakbank.employeeRegistration.entity.Employee;
 import com.rakbank.employeeRegistration.repository.DepartmentRepository;
@@ -23,7 +22,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -101,7 +99,7 @@ public class EmployeeControllerTest {
         given(employeeRepository.findById(anyLong())).willReturn(Optional.of(employee));
         ObjectMapper mapper = new ObjectMapper();
 
-        mockMvc.perform(put("/api/v1/employees/" + Long.toString(employee.getEmployeeNo()))
+        mockMvc.perform(put("/api/v1/employees/" + employee.getEmployeeNo())
                         .content(mapper.writeValueAsString(employee))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -115,7 +113,7 @@ public class EmployeeControllerTest {
         employee.setEmployeeName("test");
 
         given(employeeRepository.findById(anyLong())).willReturn(Optional.of(employee));
-        mockMvc.perform(delete("/api/v1/employees/" + Long.toString(employee.getEmployeeNo()))
+        mockMvc.perform(delete("/api/v1/employees/" + employee.getEmployeeNo())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
