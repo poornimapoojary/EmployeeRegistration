@@ -1,4 +1,4 @@
-package com.rakbank.employeeRegistration.entity;
+package com.rakbank.employeeregistration.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

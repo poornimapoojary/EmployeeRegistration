@@ -1,6 +1,6 @@
-package com.rakbank.employeeRegistration.repository;
+package com.rakbank.employeeregistration.repository;
 
-import com.rakbank.employeeRegistration.entity.Department;
+import com.rakbank.employeeregistration.entity.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
-package com.rakbank.employeeRegistration;
+package com.rakbank.employeeregistration;
 
-import com.rakbank.employeeRegistration.entity.Department;
-import com.rakbank.employeeRegistration.repository.DepartmentRepository;
+import com.rakbank.employeeregistration.entity.Department;
+import com.rakbank.employeeregistration.repository.DepartmentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

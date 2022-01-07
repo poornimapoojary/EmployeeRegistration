@@ -1,4 +1,4 @@
-package com.rakbank.employeeRegistration.exception;
+package com.rakbank.employeeregistration.exception;
 
 import java.util.Date;
 

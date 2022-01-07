@@ -1,7 +1,7 @@
-package com.rakbank.employeeRegistration.controller;
+package com.rakbank.employeeregistration.controller;
 
-import com.rakbank.employeeRegistration.entity.Department;
-import com.rakbank.employeeRegistration.repository.DepartmentRepository;
+import com.rakbank.employeeregistration.entity.Department;
+import com.rakbank.employeeregistration.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
