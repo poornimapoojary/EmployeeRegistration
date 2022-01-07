@@ -1,9 +1,9 @@
-//package com.rakbank.employeeRegistration.controller;
+//package com.rakbank.employeeregistration.controller;
 //
 //import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.rakbank.employeeRegistration.entity.Employee;
-//import com.rakbank.employeeRegistration.repository.DepartmentRepository;
-//import com.rakbank.employeeRegistration.repository.EmployeeRepository;
+//import com.rakbank.employeeregistration.entity.Employee;
+//import com.rakbank.employeeregistration.repository.DepartmentRepository;
+//import com.rakbank.employeeregistration.repository.EmployeeRepository;
 //
 //import org.junit.Ignore;
 //import org.junit.Test;
